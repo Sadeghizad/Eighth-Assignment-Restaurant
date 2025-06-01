@@ -2,8 +2,10 @@ package ap.restaurant.controllers;
 
 import ap.restaurant.database.UserDAO;
 import ap.restaurant.entities.User;
+import ap.restaurant.utils.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class SignUpController {
 
@@ -29,7 +31,8 @@ public class SignUpController {
 
         if (success) {
             showAlert("Account created successfully!");
-            // TODO: Load login scene
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            SceneManager.switchScene(stage, "/ap/restaurant/fxml/login.fxml");
         } else {
             showAlert("Username already exists.");
         }

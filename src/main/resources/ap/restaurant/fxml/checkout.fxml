@@ -8,6 +8,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <Stage xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ap.restaurant.controllers.CheckoutController">
     <scene>
         <Scene>
@@ -18,8 +20,15 @@
                      <Font size="24.0" />
                   </font>
                </Label>
-               <ListView prefHeight="200.0" prefWidth="200.0" />
-               <Label text="Total Cost: %d $">
+                <TableView fx:id="receiptTable">
+                    <columns>
+                        <TableColumn fx:id="nameCol" text="Item"/>
+                        <TableColumn fx:id="qtyCol" text="Qty"/>
+                        <TableColumn fx:id="priceCol" text="Price"/>
+                        <TableColumn fx:id="subtotalCol" text="Subtotal"/>
+                    </columns>
+                </TableView>
+                <Label text="Total Cost: %d $">
                   <font>
                      <Font size="14.0" />
                   </font>
