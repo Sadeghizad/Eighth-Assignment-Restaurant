@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ap.restaurant.controllers.CheckoutController"
+      spacing="10" alignment="CENTER"
+      prefHeight="400.0" prefWidth="500.0">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <children>
+
+        <Label text="Receipt">
+            <font><Font size="24.0"/></font>
+        </Label>
+
+        <TableView fx:id="receiptTable" prefHeight="250.0">
+            <columns>
+                <TableColumn fx:id="nameCol" text="Item"/>
+                <TableColumn fx:id="qtyCol" text="Qty"/>
+                <TableColumn fx:id="priceCol" text="Price"/>
+                <TableColumn fx:id="subtotalCol" text="Subtotal"/>
+            </columns>
+        </TableView>
+
+        <Label fx:id="totalPriceLabel" text="Total: 0 Toman">
+            <font><Font size="14.0"/></font>
+        </Label>
+
+        <Button text="Place Order" onAction="#onPlaceOrderClick">
+            <font><Font size="14.0"/></font>
+        </Button>
+
+        <HBox spacing="20" alignment="CENTER">
+            <Button text="Order Again" onAction="#onOrderAgainClick"/>
+            <Button text="Log Out" onAction="#onLogoutClick"/>
+        </HBox>
+
+    </children>
+</VBox>
