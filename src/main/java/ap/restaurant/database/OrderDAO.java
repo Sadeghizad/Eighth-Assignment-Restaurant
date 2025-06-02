@@ -14,7 +14,6 @@ public class OrderDAO {
             stmt.setInt(1, order.getUserId());
             stmt.setTimestamp(2, Timestamp.valueOf(order.getCreatedAt()));
             stmt.setInt(3, order.getTotalPrice());
-
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) return rs.getInt("id");
 

@@ -11,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class LoginController {
 
     @FXML private TextField usernameField;
@@ -24,17 +26,26 @@ public class LoginController {
         boolean success = UserDAO.login(username, password);
         if (success) {
             showAlert("Login successful!");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ap/restaurant/fxml/main.fxml"));
+            int loggedInUserId = UserDAO.getUserId(username);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ap/restaurant/fxml/main.fxml"));
+                Parent root = loader.load(); // ❗️must load before calling getController()
 
-            // Pass data
-            MainController controller = loader.getController();
-            controller.setUserId(UserDAO.getUserId(username));
-
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            SceneManager.switchScene(stage, "/ap/restaurant/fxml/main.fxml");
+                MainController controller = loader.getController();
+                controller.setUserId(loggedInUserId);
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                SceneManager.switchScene(stage, "/ap/restaurant/fxml/main.fxml", c -> ((MainController) c).setUserId(loggedInUserId));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             showAlert("Invalid credentials.");
         }
+    }
+    @FXML
+    private void onSignUpClick() {
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        SceneManager.switchScene(stage, "ap/restaurant/fxml/SignUp.fxml");
     }
 
     private void showAlert(String message) {

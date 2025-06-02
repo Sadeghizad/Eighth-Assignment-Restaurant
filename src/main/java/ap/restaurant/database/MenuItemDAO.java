@@ -5,7 +5,6 @@ import ap.restaurant.entities.MenuItem;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class MenuItemDAO {
     public static List<MenuItem> getAll() {
         List<MenuItem> items = new ArrayList<>();

@@ -4,8 +4,13 @@ import ap.restaurant.database.UserDAO;
 import ap.restaurant.entities.User;
 import ap.restaurant.utils.SceneManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class SignUpController {
 
@@ -37,7 +42,17 @@ public class SignUpController {
             showAlert("Username already exists.");
         }
     }
-
+    @FXML
+    private void onLoginLinkClick() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/ap/restaurant/fxml/login.fxml"));
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);

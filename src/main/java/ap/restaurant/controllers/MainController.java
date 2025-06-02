@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainController {
@@ -40,6 +41,7 @@ public class MainController {
     public void initialize() {
         cartMap = new HashMap<>();
         cartItems = FXCollections.observableArrayList();
+        cartList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         cartList.setItems(cartItems);
 
         menuItems = FXCollections.observableArrayList(MenuItemDAO.getAll());
@@ -77,12 +79,11 @@ public class MainController {
         MenuItem selected = menuList.getSelectionModel().getSelectedItem();
         if (selected != null) {
             int id = selected.getId();
-            int quantity = Integer.parseInt(quantityField.getText());
             if (cartMap.containsKey(id)) {
                 CartItem existing = cartMap.get(id);
-                cartMap.put(id, new CartItem(existing.getMenuItem(), existing.getQuantity() + quantity));
+                cartMap.put(id, new CartItem(existing.getMenuItem(), existing.getQuantity() + 1));
             } else {
-                cartMap.put(id, new CartItem(selected, quantity));
+                cartMap.put(id, new CartItem(selected, 1));
             }
             refreshCart();
         }
@@ -90,20 +91,17 @@ public class MainController {
 
     @FXML
     private void onRemoveClick() {
-        CartItem selected = cartList.getSelectionModel().getSelectedItem();
-        if (selected != null) {
+        var selectedItems = cartList.getSelectionModel().getSelectedItems();
+
+        // Use a copy of the list to avoid ConcurrentModificationException
+        for (CartItem selected : List.copyOf(selectedItems)) {
             int id = selected.getMenuItem().getId();
-            if (cartMap.containsKey(id)) {
-                CartItem current = cartMap.get(id);
-                if (current.getQuantity() <= 1) {
-                    cartMap.remove(id);
-                } else {
-                    cartMap.put(id, new CartItem(current.getMenuItem(), current.getQuantity() - 1));
-                }
-                refreshCart();
-            }
+            cartMap.remove(id);
         }
+
+        refreshCart(); // update UI
     }
+
 
     private void refreshCart() {
         cartItems.setAll(cartMap.values());

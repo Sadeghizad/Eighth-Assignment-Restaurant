@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ap.restaurant.controllers.LoginController"
-            prefHeight="426.0" prefWidth="286.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ap.restaurant.controllers.LoginController">
 
     <children>
-        <SplitPane orientation="VERTICAL" prefHeight="426.0" prefWidth="290.0" style="-fx-alignment: center;">
-            <items>
-                <VBox prefHeight="498.0" prefWidth="598.0" style="-fx-alignment: center;">
-                    <children>
-                        <Label prefHeight="66.0" prefWidth="109.0" text="Login">
-                            <font>
-                                <Font size="44.0" />
-                            </font>
-                        </Label>
-                        <Region prefHeight="126.0" prefWidth="448.0" />
-                        <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="212.0" promptText="Username" />
-                        <Region prefHeight="44.0" prefWidth="598.0" />
-                        <PasswordField fx:id="passwordField" promptText="Password" />
-                        <Region prefHeight="140.0" prefWidth="289.0" />
-                        <Button text="Login" onAction="#onLoginClick" />
-                        <HBox prefHeight="59.0" prefWidth="598.0" style="-fx-alignment: center;">
-                            <children>
-                                <Label text="Don't have an account?" />
-                                <Hyperlink text="SignUp" />
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            </items>
-        </SplitPane>
+          <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-alignment: center;">
+              <children>
+            <Region prefHeight="49.0" prefWidth="600.0" />
+                  <Label prefHeight="66.0" prefWidth="109.0" text="Login">
+                      <font>
+                          <Font size="44.0" />
+                      </font>
+                  </Label>
+                  <Region prefHeight="76.0" prefWidth="600.0" />
+                  <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="5.0" prefWidth="364.0" promptText="Username" />
+            <Region prefHeight="54.0" prefWidth="600.0" />
+                  <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="364.0" promptText="Password" />
+                  <Region prefHeight="54.0" prefWidth="600.0" />
+                  <Button onAction="#onLoginClick" text="Login" />
+                  <HBox prefHeight="59.0" prefWidth="598.0" style="-fx-alignment: center;">
+                      <children>
+                          <Label text="Don't have an account?" />
+                          <Hyperlink onAction="#onSignUpClick" text="SignUp" />
+                      </children>
+                  </HBox>
+            <Region prefHeight="54.0" prefWidth="600.0" />
+              </children>
+          </VBox>
     </children>
 </AnchorPane>

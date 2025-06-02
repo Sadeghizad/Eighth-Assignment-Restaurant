@@ -66,6 +66,10 @@ public class CheckoutController {
             showAlert("✅ Order placed.");
             cart.clear();
         } else {
+            if (userId <= 0) {
+                showAlert("Something went wrong. Please log in again.");
+                return;
+            }
             showAlert("❌ Failed to place order.");
         }
     }
@@ -73,13 +77,13 @@ public class CheckoutController {
     @FXML
     private void onLogoutClick() {
         Stage stage = (Stage) receiptTable.getScene().getWindow();
-        SceneManager.switchScene(stage, "/ap/restaurant/fxml/Login.fxml");
+        SceneManager.switchScene(stage, "/ap/restaurant/fxml/login.fxml");
     }
 
     @FXML
     private void onOrderAgainClick() {
         Stage stage = (Stage) receiptTable.getScene().getWindow();
-        SceneManager.switchScene(stage, "/ap/restaurant/fxml/main.fxml");
+        SceneManager.switchScene(stage, "/ap/restaurant/fxml/main.fxml", c -> ((MainController) c).setUserId(userId));
     }
 
     private void showAlert(String message) {
